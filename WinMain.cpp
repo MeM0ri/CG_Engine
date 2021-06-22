@@ -16,6 +16,10 @@ int CALLBACK WinMain
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
+			if (wnd.kbrd.KeyIsPressed(VK_SPACE))
+			{
+				MessageBox(nullptr, "What tha...", "It's space invaders!", MB_OK);
+			}
 		}
 
 		if (gResult == -1)

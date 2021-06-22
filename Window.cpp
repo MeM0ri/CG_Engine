@@ -109,6 +109,17 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	case WM_CLOSE:
 		PostQuitMessage(0);
 		return 0;
+	/*--------------Keyboard Events--------------*/
+	case WM_KEYDOWN:
+		kbrd.OnKeyPressed(static_cast<unsigned char>(wParam));
+		break;
+	case WM_KEYUP:
+		kbrd.OnKeyReleased(static_cast<unsigned char>(wParam));
+		break;
+	case WM_CHAR:
+		kbrd.OnChar(static_cast<unsigned char>(wParam));
+		break;
+	/*--------------End Keyboard Events--------------*/
 	}
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
