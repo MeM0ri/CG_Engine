@@ -20,6 +20,7 @@ int CALLBACK WinMain
 			DispatchMessage(&msg);
 
 			/*--------------Start Tests Part--------------*/
+			static int i = 0;
 			while (!wnd.mouse.IsEmpty())
 			{
 				const auto e = wnd.mouse.Read();
@@ -34,6 +35,23 @@ int CALLBACK WinMain
 						oss << "Mouse Position: (" << e.GetPosX() << "," << e.GetPosY() << ")";
 						wnd.SetTitle(oss.str());
 					}
+					break;
+				case Mouse::Event::Type::WheelUp:
+					i++;
+					{
+						std::ostringstream oss;
+						oss << "Up: " << i;
+						wnd.SetTitle(oss.str());
+					}
+					break;
+				case Mouse::Event::Type::WheelDown:
+					i--;
+					{
+						std::ostringstream oss;
+						oss << "Down: " << i;
+						wnd.SetTitle(oss.str());
+					}
+					break;
 				}
 			}
 			if (wnd.kbrd.KeyIsPressed(VK_MENU))
