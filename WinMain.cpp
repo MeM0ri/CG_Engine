@@ -1,4 +1,5 @@
 #include "Window.h"
+
 int CALLBACK WinMain
 (
 	HINSTANCE	hInstance,
@@ -18,7 +19,7 @@ int CALLBACK WinMain
 			DispatchMessage(&msg);
 			if (wnd.kbrd.KeyIsPressed(VK_SPACE))
 			{
-				MessageBox(nullptr, "What tha...", "It's space invaders!", MB_OK);
+				MessageBox(nullptr, "What tha...", "It's space invaders!", MB_OK | MB_ICONEXCLAMATION);
 			}
 		}
 

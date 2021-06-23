@@ -13,10 +13,7 @@ Keyboard::Event Keyboard::ReadKey() noexcept
 		keybuffer.pop();
 		return e;
 	}
-	else
-	{
-		return Keyboard::Event();
-	}
+	return {};
 }
 
 bool Keyboard::KeyIsEmpty() const noexcept
