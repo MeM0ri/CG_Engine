@@ -2,23 +2,36 @@
 #include "DefineWindow.h"
 #include "Keyboard.h"
 #include "Exception.h"
+#include "Graphics.h"
 #include "Mouse.h"
 #include <optional>
+#include <memory>
 
 class Window
 {
 public:
 	class Exception : public MeMoriException
 	{
+		using MeMoriException::MeMoriException;
 	public:
-		Exception(int line, const char* file, HRESULT hr) noexcept;
-		const char* what() const noexcept override;
-		virtual const char* GetType() const noexcept override;
 		static std::string TranslateErrorCode(HRESULT hr) noexcept;
+	};
+	class HrException : public Exception
+	{
+	public:
+		HrException(int line, const char* file, HRESULT hr) noexcept;
+		const char* what() const noexcept override;
+		const char* GetType() const noexcept override;
 		HRESULT GetErrorCode() const noexcept;
-		std::string GetErrorString() const noexcept;
+		std::string GetErrorDescription() const noexcept;
 	private:
 		HRESULT hr;
+	};
+	class NoGfxException : public Exception
+	{
+	public:
+		using Exception::Exception;
+		const char* GetType() const noexcept override;
 	};
 private:
 	/*--------------Singleton manages registration/cleanup of window class--------------*/
@@ -42,7 +55,8 @@ public:
 	Window(const Window&) = delete;
 	Window& operator = (const Window&) = delete;
 	void SetTitle(const std::string& title);
-	static std::optional<int> ProcessMessage();
+	static std::optional<int> ProcessMessages() noexcept;
+	Graphics& Gfx();
 private:
 	static LRESULT CALLBACK HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
 	static LRESULT CALLBACK HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
@@ -54,8 +68,10 @@ private:
 	int width;
 	int height;
 	HWND hWnd;
+	std::unique_ptr<Graphics> pGfx;
 };
 
 /*--------------Error Exception Helper Macro--------------*/
-#define MMWND_EXCEPT(hr) Window::Exception(__LINE__,__FILE__,hr)
-#define MMWND_LAST_EXCEPT(hr) Window::Exception(__LINE__,__FILE__,GetLastError())
+#define MMWND_EXCEPT( hr ) Window::HrException( __LINE__,__FILE__,(hr) )
+#define MMWND_LAST_EXCEPT() Window::HrException( __LINE__,__FILE__,GetLastError() )
+#define MMWND_NOGFX_EXCEPT() Window::NoGfxException( __LINE__,__FILE__ )
