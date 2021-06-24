@@ -149,16 +149,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="App.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="MeMoriTimer.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="App.h" />
     <ClInclude Include="DefineWindow.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="MeMoriTimer.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Window.h" />

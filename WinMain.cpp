@@ -1,4 +1,4 @@
-#include "Window.h"
+#include "App.h"
 #include <sstream>
 
 int CALLBACK WinMain
@@ -11,62 +11,7 @@ int CALLBACK WinMain
 {
 	try
 	{
-		Window wnd(800, 300, "MeM0ri Corp.");
-		MSG msg;
-		BOOL gResult;
-		while ((gResult = GetMessage(&msg, nullptr, 0, 0)) > 0)
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-
-			/*--------------Start Tests Part--------------*/
-			static int i = 0;
-			while (!wnd.mouse.IsEmpty())
-			{
-				const auto e = wnd.mouse.Read();
-				switch (e.GetType())
-				{
-				case Mouse::Event::Type::Leave:
-					wnd.SetTitle("She's Gone! She's Go-o-one!");
-					break;
-				case Mouse::Event::Type::Move:
-					{
-						std::ostringstream oss;
-						oss << "Mouse Position: (" << e.GetPosX() << "," << e.GetPosY() << ")";
-						wnd.SetTitle(oss.str());
-					}
-					break;
-				case Mouse::Event::Type::WheelUp:
-					i++;
-					{
-						std::ostringstream oss;
-						oss << "Up: " << i;
-						wnd.SetTitle(oss.str());
-					}
-					break;
-				case Mouse::Event::Type::WheelDown:
-					i--;
-					{
-						std::ostringstream oss;
-						oss << "Down: " << i;
-						wnd.SetTitle(oss.str());
-					}
-					break;
-				}
-			}
-			if (wnd.kbrd.KeyIsPressed(VK_MENU))
-			{
-				MessageBox(nullptr, "What tha...", "It's alt invaders!", MB_OK | MB_ICONEXCLAMATION);
-			}
-			/*--------------End Tests Part--------------*/
-		}
-
-		if (gResult == -1)
-		{
-			return -1;
-		}
-
-		return msg.wParam;
+		return App{}.Go();
 	}
 	catch (const MeMoriException& e)
 	{
