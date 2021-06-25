@@ -33,5 +33,10 @@ void App::DoFrame()
 	const float c = sin(timer.Peek()) / 2.0f + 0.5f;
 	wnd.Gfx().ClearBuffer(c, c, 1.0f);
 	/*--------------End Blue Fun Test--------------*/
+
+	/*--------------Godlike Triangles!!!--------------*/
+	//wnd.Gfx().DrawTestTriangle(0.0f); // Static triangles
+	wnd.Gfx().DrawTestTriangle(timer.Peek()); //Rotating Triangles
+		
 	wnd.Gfx().EndFrame();
 }
