@@ -19,6 +19,9 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{95ba7179-cc87-45f5-a75b-e696fdc6cf93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Macros">
+      <UniqueIdentifier>{eace8cc3-396b-448c-9d37-53fa4ef1e678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -85,6 +88,12 @@
     </ClInclude>
     <ClInclude Include="DxgiInfoManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsThrowMacros.h">
+      <Filter>Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsThrowMacros.h">
+      <Filter>Macros</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

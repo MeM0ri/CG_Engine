@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "resource.h"
+#include "WindowsThrowMacros.h"
 #include <sstream>
 
 /*--------------Get in touch with Window Class--------------*/
