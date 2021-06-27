@@ -21,5 +21,5 @@ private:
 	float speed_factor = 1.0f;
 	Camera cam;
 	PointLight light;
-	static constexpr size_t nDrawables = 50;
+	static constexpr size_t nDrawables = 20;
 };
